@@ -13,4 +13,4 @@ cerealJs is a static site generator library that provides flexibility.
 ## Release Notes
 
 ## License
-
+Copyright (c) Philip Ermish. Licensed under GNU-GPLv3.
