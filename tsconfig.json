@@ -1,12 +1,24 @@
 {
-  "compilerOptions": {
-    "target": "ES2015",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Recommended"
-}
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Node 16",
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "exclude": ["node_modules", "lib", "dist"],
+    "compilerOptions": {
+      "lib": ["es2020", "es2020.promise", "es2020.bigint", "es2020.string"],
+      "module": "commonjs",
+      "target": "es2019",
+      "jsx": "react-jsx",
+      "allowJs": true,
+      "strict": true,
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "forceConsistentCasingInFileNames": true,
+      "typeRoots": [
+        "./node_modules/@types",
+        "./node_modules/gray-matter/"
+      ]
+    }
+  }
