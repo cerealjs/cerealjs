@@ -1,4 +1,4 @@
-import { convertMarkdownFilesToJSXFiles, convertMarkdownToJSX } from './converter'
+import { transformMarkdownFilesIntoHtmlFiles, buildHtmlPageFromMarkdownString } from './transformer'
 import { getMdFilesFromFolder, writeJsxFiles } from './fileProcessor'
 
 const { performance, PerformanceObserver, PerformanceEntry  } = require("perf_hooks")
@@ -56,7 +56,7 @@ perfObserver.observe({ entryTypes: ["measure"], buffer: true })
             frontMatterMode: options?.frontMatterMode?.toLowerCase() ?? defaultOptions.frontMatterMode
         }
 
-        const jsxString = await convertMarkdownToJSX(markdownString, componentName, userOptions.frontMatterMode, userOptions.reactHeadContextVarName, userOptions.reactHeadContextName)
+        const jsxString = await buildHtmlPageFromMarkdownString(markdownString)
 
         return jsxString
     } catch (error) {
@@ -85,8 +85,8 @@ export const transformMarkdownFiles = async (options?: Options): Promise<number>
         }
 
         const mdFiles = await getMdFilesFromFolder(userOptions.inputPath)
-        const jsxStrings = await convertMarkdownFilesToJSXFiles(mdFiles, userOptions.frontMatterMode, userOptions.reactHeadContextVarName, userOptions.reactHeadContextName)
-        await writeJsxFiles(userOptions.outputPath, jsxStrings, userOptions.deleteExistingOutputFolder)
+        const htmlFileStrings = await transformMarkdownFilesIntoHtmlFiles(mdFiles)
+        await writeJsxFiles(userOptions.outputPath, htmlFileStrings, userOptions.deleteExistingOutputFolder)
 
         return 0
     } catch (error) {
